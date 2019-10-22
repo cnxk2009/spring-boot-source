@@ -428,10 +428,13 @@ public class SpringApplication {
             Class<?>[] parameterTypes, Object... args) {
         ClassLoader classLoader = getClassLoader();
         // Use names and ensure unique to protect against duplicates
+     // <1> 加载指定类型对应的，在 `META-INF/spring.factories` 里的类名的数组
         Set<String> names = new LinkedHashSet<>(
                 SpringFactoriesLoader.loadFactoryNames(type, classLoader));
+     // <2> 创建对象
         List<T> instances = createSpringFactoriesInstances(type, parameterTypes,
                 classLoader, args, names);
+     // <3> 排序对象
         AnnotationAwareOrderComparator.sort(instances);
         return instances;
     }
