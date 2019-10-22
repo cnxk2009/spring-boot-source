@@ -303,6 +303,8 @@ public class SpringApplication {
         ConfigurableApplicationContext context = null;
         Collection<SpringBootExceptionReporter> exceptionReporters = new ArrayList<>();
         // <2> 配置 headless 属性
+        //Headless模式是系统的一种配置模式。在系统可能缺少显示设备、键盘或鼠标这些外设的情况下可以使用该模式。
+        //一般是在程序开始激活headless模式，告诉程序，现在你要工作在Headless mode下，就不要指望硬件帮忙了，你得自力更生，依靠系统的计算能力模拟出这些特性来:
         configureHeadlessProperty();
         // 获得 SpringApplicationRunListener 的数组，并启动监听
         SpringApplicationRunListeners listeners = getRunListeners(args);
