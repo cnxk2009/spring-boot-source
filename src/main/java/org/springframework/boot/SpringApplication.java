@@ -633,17 +633,18 @@ public class SpringApplication {
      * @see #setApplicationContextClass(Class)
      */
     protected ConfigurableApplicationContext createApplicationContext() {
+        // 根据 webApplicationType 类型，获得 ApplicationContext 类型
         Class<?> contextClass = this.applicationContextClass;
         if (contextClass == null) {
             try {
                 switch (this.webApplicationType) {
-                case SERVLET:
+                case SERVLET://基于servlet的Web项目
                     contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS);
                     break;
-                case REACTIVE:
+                case REACTIVE://响应式web应用==reactive web Spring5版本的新特性
                     contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS);
                     break;
-                default:
+                default://NONE 不需要再web容器的环境下运行，也就是普通的工程
                     contextClass = Class.forName(DEFAULT_CONTEXT_CLASS);
                 }
             }
@@ -654,6 +655,8 @@ public class SpringApplication {
                         ex);
             }
         }
+        // 创建 ApplicationContext 对象
+        //使用其“主要”构造函数（对于Kotlin类，可能具有声明的默认参数）或其默认构造函数（对于常规Java类，期望标准的无参数设置）来实例化类。
         return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass);
     }
 
