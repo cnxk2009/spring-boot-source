@@ -459,7 +459,7 @@ public class SpringApplication {
             Class<?>[] parameterTypes, Object... args) {
         ClassLoader classLoader = getClassLoader();
         // Use names and ensure unique to protect against duplicates
-        // <1> 加载指定类型对应的，在 `META-INF/spring.factories` 里的类名的数组
+        // <1> 加载指定类型对应的，在 SpringBoot的autoconfigure依赖包中的`META-INF/spring.factories` 里的类名的数组
         Set<String> names = new LinkedHashSet<>(
                 SpringFactoriesLoader.loadFactoryNames(type, classLoader));
         // <2> 创建对象
