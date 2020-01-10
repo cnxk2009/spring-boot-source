@@ -89,7 +89,7 @@ public class AutoConfigurationImportSelector
     private ClassLoader beanClassLoader;
 
     private ResourceLoader resourceLoader;
-
+    //容器中加入Bean自动装配的核心代码
     @Override
     public String[] selectImports(AnnotationMetadata annotationMetadata) {
         if (!isEnabled(annotationMetadata)) {
@@ -116,12 +116,15 @@ public class AutoConfigurationImportSelector
             return EMPTY_ENTRY;
         }
         AnnotationAttributes attributes = getAttributes(annotationMetadata);
+        //去mata-info/spring.factories文件中 查询 EnableAutoConfiguration对于值
         List<String> configurations = getCandidateConfigurations(annotationMetadata,
                 attributes);
+        //去除重复的配置类，若我们自己写的starter 可能存主重复的
         configurations = removeDuplicates(configurations);
         Set<String> exclusions = getExclusions(annotationMetadata, attributes);
         checkExcludedClasses(configurations, exclusions);
         configurations.removeAll(exclusions);
+        //根据maven 导入的启动器过滤出 需要导入的配置类
         configurations = filter(configurations, autoConfigurationMetadata);
         fireAutoConfigurationImportEvents(configurations, exclusions);
         return new AutoConfigurationEntry(configurations, exclusions);

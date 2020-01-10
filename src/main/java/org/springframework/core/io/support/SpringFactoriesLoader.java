@@ -123,6 +123,7 @@ public final class SpringFactoriesLoader {
         return loadSpringFactories(classLoader).getOrDefault(factoryClassName, new ArrayList<String>());
     }
 
+    //去spring.factories 中去查询EnableAutoConfirution类
     private static Map<String, List<String>> loadSpringFactories(@Nullable ClassLoader classLoader) {
         MultiValueMap<String, String> result = cache.get(classLoader);
         if (result != null) {
