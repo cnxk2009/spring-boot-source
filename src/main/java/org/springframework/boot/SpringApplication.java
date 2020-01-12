@@ -328,7 +328,7 @@ public class SpringApplication {
             // <8> 主要是调用所有初始化类的 initialize 方法
             prepareContext(context, environment, listeners, applicationArguments,
                     printedBanner);
-            // <9> 初始化 Spring 容器。
+            // <9> 初始化 Spring IOC 容器。
             refreshContext(context);
             // <10> 执行 Spring 容器的初始化的后置逻辑。默认实现为空。
             afterRefresh(context, applicationArguments);
@@ -1323,7 +1323,8 @@ public class SpringApplication {
      */
     public static ConfigurableApplicationContext run(Class<?>[] primarySources,
             String[] args) {
-        //创建SpringApplication对象,并执行运行。
+        //创建SpringApplication对象,并执行run方法,run方法中调用 AbstractApplicationContext的refresh方法启动IOC容器
+        //在
         return new SpringApplication(primarySources).run(args);
     }
 
